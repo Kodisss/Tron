@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class CPU : MonoBehaviour
 {
     private Rigidbody2D rb;
 
