@@ -608,7 +608,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2009730331}
         m_TargetAssemblyTypeName: SettingsScreen, Assembly-CSharp
-        m_MethodName: SetDifficulty
+        m_MethodName: SetSpeed
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
