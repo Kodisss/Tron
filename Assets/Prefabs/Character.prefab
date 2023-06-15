@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -174,5 +174,4 @@ MonoBehaviour:
   explosionSFX: {fileID: 1992253877110080380, guid: 2b58a21ae3935e944b63cb28e8a73a7c, type: 3}
   explosionVFX: {fileID: 1245202137872002604, guid: 6f20fa9469def1943a01ec6b54acdab9, type: 3}
   trail: {fileID: 6705420674494454291, guid: 7ff1e18c5164c6e4185de157ec88aa9e, type: 3}
-  speed: 3
-  spawnRate: 0.075
+  speed: 2
