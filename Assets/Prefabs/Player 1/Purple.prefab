@@ -175,4 +175,3 @@ MonoBehaviour:
   explosionVFX: {fileID: 1245202137872002604, guid: 6f20fa9469def1943a01ec6b54acdab9, type: 3}
   trail: {fileID: 6705420674494454291, guid: 7ff1e18c5164c6e4185de157ec88aa9e, type: 3}
   playerName: Player 1
-  speed: 2

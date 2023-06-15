@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1897853736153931484}
   m_Layer: 0
   m_Name: Lime
-  m_TagString: Player
+  m_TagString: CPU
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,4 +174,3 @@ MonoBehaviour:
   explosionSFX: {fileID: 1992253877110080380, guid: 2b58a21ae3935e944b63cb28e8a73a7c, type: 3}
   explosionVFX: {fileID: 1245202137872002604, guid: 2d2c1d6a4263ba74fa967948d87eed53, type: 3}
   trail: {fileID: 6705420674494454291, guid: ee34a60d53aa502479fcae0ef63ce697, type: 3}
-  speed: 2

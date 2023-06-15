@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -63,12 +64,16 @@ public class Tron : MonoBehaviour
 
     private void GetWinnerName()
     {
-        GameObject[] listOfPlayers = GameObject.FindGameObjectsWithTag("Player");
-        //Debug.Log(listOfPlayers);
-        if (GameObject.FindGameObjectsWithTag("Player").Length == 1)
+        GameObject[] listOfCPU = GameObject.FindGameObjectsWithTag("CPU");
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        if (listOfCPU.Length == 1)
         {
-            //Debug.Log("Try to name");
-            PlayerPrefs.SetString("Winner",listOfPlayers[0].name.Replace("(Clone)", ""));
+            PlayerPrefs.SetString("Winner", listOfCPU[0].name.Replace("(Clone)", ""));
+        }
+        else if (playerObject && listOfCPU.Length == 0)
+        {
+            PlayerPrefs.SetString("Winner", playerObject.name.Replace("(Clone)", ""));
         }
     }
 
@@ -79,6 +84,11 @@ public class Tron : MonoBehaviour
 
     private bool CheckForAlivePlayers()
     {
-        return GameObject.FindWithTag("Player") != null;
+        bool result = true;
+        if (GameObject.FindWithTag("Player") == null && GameObject.FindWithTag("CPU") == null)
+        {
+            result = false;
+        }
+        return result;
     }
 }

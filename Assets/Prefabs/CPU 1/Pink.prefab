@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1897853736153931484}
   m_Layer: 0
   m_Name: Pink
-  m_TagString: Player
+  m_TagString: CPU
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,4 +174,3 @@ MonoBehaviour:
   explosionSFX: {fileID: 1992253877110080380, guid: 2b58a21ae3935e944b63cb28e8a73a7c, type: 3}
   explosionVFX: {fileID: 1245202137872002604, guid: 9538cdf380985864bb2c7519b7f969f9, type: 3}
   trail: {fileID: 6705420674494454291, guid: 6054a79d710da2d489ed5b3f6411f27a, type: 3}
-  speed: 2
