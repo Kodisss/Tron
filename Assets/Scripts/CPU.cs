@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CPU : Player
 {
+    [SerializeField] private Transform target;
+
     protected override void Start()
     {
         base.Start();
