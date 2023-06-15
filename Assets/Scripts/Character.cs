@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
     [Header("Game Constants")]
     [SerializeField] private string playerName = "Player 1";
     private float speed;
-    private float spawnRate;
+    private float spawnRate = 0.02f;
 
     private bool canExplode = true;
 
@@ -29,10 +29,8 @@ public class Character : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        InitialDirection();
         speed = (PlayerPrefs.GetInt("Speed") + 1) * 2;
-        // it's a great spawn rate for it to not spawn too much object but also to have a trail without holes
-        spawnRate = (1f / 40f) * speed; 
+        InitialDirection();
     }
 
     // Update is called once per frame

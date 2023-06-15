@@ -15,7 +15,7 @@ public class CPU : MonoBehaviour
 
     [Header("Game Constants")]
     private float speed;
-    private float spawnRate;
+    private float spawnRate = 0.02f;
 
     private bool canExplode = true;
 
@@ -29,10 +29,8 @@ public class CPU : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        UpdateDirection();
         speed = (PlayerPrefs.GetInt("Speed") + 1) * 2;
-        // it's a great spawn rate for it to not spawn too much object but also to have a trail without holes
-        spawnRate = (1f / 40f) * speed; 
+        UpdateDirection();
     }
 
     // Update is called once per frame
