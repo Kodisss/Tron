@@ -14,7 +14,7 @@ public class CPU : MonoBehaviour
     [SerializeField] private GameObject trail;
 
     [Header("Game Constants")]
-    [SerializeField] private float speed = 2f;
+    private float speed;
     private float spawnRate;
 
     private bool canExplode = true;
@@ -30,7 +30,7 @@ public class CPU : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         UpdateDirection();
-
+        speed = (PlayerPrefs.GetInt("Speed") + 1) * 2;
         // it's a great spawn rate for it to not spawn too much object but also to have a trail without holes
         spawnRate = (1f / 40f) * speed; 
     }
