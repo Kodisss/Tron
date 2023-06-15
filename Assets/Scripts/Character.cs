@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
     private Rigidbody2D rb;
 
+    [Header("FX")]
     [SerializeField] private GameObject explosionSFX;
     [SerializeField] private GameObject explosionVFX;
+    [SerializeField] private GameObject trail;
 
+    [Header("Game Constants")]
     [SerializeField] private float speed = 3f;
+    private float spawnRate;
+
+    private bool canExplode = true;
+
+    private float timer = 0f;
 
     private Vector2 direction = Vector2.right;
     private bool movingHorizontaly = true;
@@ -19,13 +28,35 @@ public class Character : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        // it's a great spawn rate for it to not spawn too much object but also to have a trail without holes
+        spawnRate = (1f / 40f) * speed; 
     }
 
     // Update is called once per frame
     private void Update()
     {
         UpdateDirection();
+        TrailGestion();
+    }
+
+    private void FixedUpdate()
+    {
         Move();
+    }
+
+    private void TrailGestion()
+    {
+        // Increment the timer by the elapsed time since the last frame
+        timer += Time.deltaTime;
+
+        // Check if the desired interval has passed
+        if (timer >= spawnRate)
+        {
+            Instantiate(trail, rb.transform.position, rb.transform.rotation);
+
+            timer = 0f;
+        }
     }
 
     private void Move()
@@ -34,6 +65,7 @@ public class Character : MonoBehaviour
         rb.velocity = direction * speed;
     }
 
+    // checks for input and change direction accordingly you also cannot turn around
     private void UpdateDirection()
     {
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
@@ -54,12 +86,15 @@ public class Character : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall") && canExplode)
         {
+            Instantiate(trail, rb.transform.position, rb.transform.rotation); // place a last trail before you die
             PlayExplosion();
+            canExplode = false;
         }
     }
 
+    // do everything you need before diying
     private void PlayExplosion()
     {
         GameObject explosionSound = Instantiate(explosionSFX);
