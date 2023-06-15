@@ -28,8 +28,8 @@ public class Tron : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        ManageGameEnd();
         GetWinnerName();
+        ManageGameEnd();
     }
 
     private void SpawnEveryone()
