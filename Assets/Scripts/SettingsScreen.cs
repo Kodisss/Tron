@@ -6,11 +6,13 @@ using TMPro;
 
 public class SettingsScreen : MonoBehaviour
 {
-    [SerializeField] TMP_Dropdown dropdownMenu;
+    [SerializeField] TMP_Dropdown difficultyMenu;
+    [SerializeField] TMP_Dropdown gameModeMenu;
 
     private void Start()
     {
-        dropdownMenu.value = PlayerPrefs.GetInt("Difficulty");
+        difficultyMenu.value = PlayerPrefs.GetInt("Difficulty");
+        gameModeMenu.value = PlayerPrefs.GetInt("GameMode");
     }
 
     private void Update()
@@ -22,6 +24,13 @@ public class SettingsScreen : MonoBehaviour
     {
         // Save the difficulty setting
         PlayerPrefs.SetInt("Difficulty", input);
+        PlayerPrefs.Save();
+    }
+
+    public void SetGameMode(int input)
+    {
+        // Save the difficulty setting
+        PlayerPrefs.SetInt("GameMode", input);
         PlayerPrefs.Save();
     }
 

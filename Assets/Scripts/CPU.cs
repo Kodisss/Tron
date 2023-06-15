@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class CPU : MonoBehaviour
 {
@@ -13,8 +14,7 @@ public class CPU : MonoBehaviour
     [SerializeField] private GameObject trail;
 
     [Header("Game Constants")]
-    [SerializeField] private string playerName = "Player 1";
-    [SerializeField] private float speed = 3f;
+    [SerializeField] private float speed = 2f;
     private float spawnRate;
 
     private bool canExplode = true;
@@ -22,14 +22,14 @@ public class CPU : MonoBehaviour
     private float timer = 0f;
 
     private Vector2 direction;
-    private bool movingHorizontaly = true;
+    private bool movingHorizontaly = false;
     private bool movingVerticaly = false;
 
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        InitialDirection();
+        UpdateDirection();
 
         // it's a great spawn rate for it to not spawn too much object but also to have a trail without holes
         spawnRate = (1f / 40f) * speed; 
@@ -38,7 +38,7 @@ public class CPU : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        UpdateDirection();
+        if(Random.Range(0,1000) == 0) UpdateDirection();
         TrailGestion();
     }
 
@@ -47,7 +47,7 @@ public class CPU : MonoBehaviour
         Move();
     }
 
-    private void InitialDirection()
+    private void UpdateDirection()
     {
         int randomNumberX = Random.Range(-1, 2);
         int randomNumberY;
@@ -61,7 +61,18 @@ public class CPU : MonoBehaviour
             randomNumberY = Random.Range(0, 2) * 2 - 1;
         }
 
-        direction = new Vector2(randomNumberX, randomNumberY);
+        if (randomNumberX != 0 && !movingHorizontaly)
+        {
+            direction = new Vector2(randomNumberX, 0f);
+            movingHorizontaly = true;
+            movingVerticaly = false;
+        }
+        else if (randomNumberY != 0 && !movingVerticaly)
+        {
+            direction = new Vector2(0f, randomNumberY);
+            movingVerticaly = true;
+            movingHorizontaly = false;
+        }
     }
 
     private void TrailGestion()
@@ -82,34 +93,6 @@ public class CPU : MonoBehaviour
     {
         // Apply the velocity to the object
         rb.velocity = direction * speed;
-    }
-
-    // checks for input and change direction accordingly you also cannot turn around
-    private void UpdateDirection()
-    {
-        Vector2 input = Vector2.zero;
-
-        if (playerName == "Player 1")
-        {
-            input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-        }else if(playerName == "Player 2")
-        {
-            input = new Vector2(Input.GetAxisRaw("Horizontal2"), Input.GetAxisRaw("Vertical2")).normalized;
-        }
-        
-
-        if (input.x != 0 && !movingHorizontaly)
-        {
-            direction = new Vector2(input.x,0f);
-            movingHorizontaly = true;
-            movingVerticaly = false;
-        }
-        else if (input.y != 0 && !movingVerticaly)
-        {
-            direction = new Vector2(0f, input.y);
-            movingVerticaly = true;
-            movingHorizontaly = false;
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7496303249682610852}
   - component: {fileID: 731255325104433060}
   m_Layer: 6
-  m_Name: Trail P1
+  m_Name: Trail CPU3
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.4901961, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -143,3 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a22a6e1a83b05ab41aa8a759b6d6f7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionSFX: {fileID: 1992253877110080380, guid: 2b58a21ae3935e944b63cb28e8a73a7c, type: 3}
+  explosionVFX: {fileID: 1245202137872002604, guid: c9cd8653cec169a4ca0c5fd3ed566205, type: 3}

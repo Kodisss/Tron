@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
 
     [Header("Game Constants")]
     [SerializeField] private string playerName = "Player 1";
-    [SerializeField] private float speed = 3f;
+    [SerializeField] private float speed = 2f;
     private float spawnRate;
 
     private bool canExplode = true;
@@ -22,8 +22,8 @@ public class Character : MonoBehaviour
     private float timer = 0f;
 
     private Vector2 direction;
-    private bool movingHorizontaly = true;
-    private bool movingVerticaly = false;
+    private bool movingHorizontaly;
+    private bool movingVerticaly;
 
     // Start is called before the first frame update
     private void Start()
@@ -55,10 +55,14 @@ public class Character : MonoBehaviour
         if(randomNumberX != 0)
         {
             randomNumberY = 0;
+            movingHorizontaly = true;
+            movingVerticaly = false;
         }
         else
         {
             randomNumberY = Random.Range(0, 2) * 2 - 1;
+            movingHorizontaly = false;
+            movingVerticaly = true;
         }
 
         direction = new Vector2(randomNumberX, randomNumberY);
