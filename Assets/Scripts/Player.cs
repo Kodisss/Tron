@@ -71,6 +71,7 @@ public abstract class Player : MonoBehaviour
     {
         GameObject explosionSound = Instantiate(explosionSFX);
         GameObject explosionParticles = Instantiate(explosionVFX, rb.transform.position, rb.transform.rotation);
+        CameraShake.Instance.ShakeCamera(5f, 0.1f);
         Destroy(explosionSound, 0.5f);
         Destroy(explosionParticles, 0.5f);
         Destroy(gameObject);
