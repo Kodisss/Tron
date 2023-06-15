@@ -29,6 +29,7 @@ public class Tron : MonoBehaviour
     private void Update()
     {
         ManageGameEnd();
+        GetWinnerName();
     }
 
     private void SpawnEveryone()
@@ -57,6 +58,17 @@ public class Tron : MonoBehaviour
         {
             end = true;
             Invoke(nameof(EndScreen), 1f);
+        }
+    }
+
+    private void GetWinnerName()
+    {
+        GameObject[] listOfPlayers = GameObject.FindGameObjectsWithTag("Player");
+        //Debug.Log(listOfPlayers);
+        if (GameObject.FindGameObjectsWithTag("Player").Length == 1)
+        {
+            //Debug.Log("Try to name");
+            PlayerPrefs.SetString("Winner",listOfPlayers[0].name.Replace("(Clone)", ""));
         }
     }
 

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4320612969411822979}
   - component: {fileID: -1897853736153931484}
   m_Layer: 0
-  m_Name: CPU 3
+  m_Name: Yellow
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

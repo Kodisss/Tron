@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8422838244244775383}
   - component: {fileID: 1748189442469606901}
   - component: {fileID: 4320612969411822979}
-  - component: {fileID: 2553117816966394545}
+  - component: {fileID: -1897853736153931484}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Lime
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,12 +28,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7732258007993546907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: 0}
+  m_LocalPosition: {x: 10, y: -5, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8422838244244775383
 SpriteRenderer:
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.49019608, g: 0, b: 1, a: 1}
+  m_Color: {r: 0.632947, g: 1, b: 0.4009434, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -159,7 +159,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2553117816966394545
+--- !u!114 &-1897853736153931484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,11 +168,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7732258007993546907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc0bbffdb690cce4e86af1ea8874f4d1, type: 3}
+  m_Script: {fileID: 11500000, guid: b33a5a282e7521e4aa307f4053498e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explosionSFX: {fileID: 1992253877110080380, guid: 2b58a21ae3935e944b63cb28e8a73a7c, type: 3}
-  explosionVFX: {fileID: 1245202137872002604, guid: 6f20fa9469def1943a01ec6b54acdab9, type: 3}
-  trail: {fileID: 6705420674494454291, guid: 7ff1e18c5164c6e4185de157ec88aa9e, type: 3}
-  playerName: Player 1
+  explosionVFX: {fileID: 1245202137872002604, guid: 2d2c1d6a4263ba74fa967948d87eed53, type: 3}
+  trail: {fileID: 6705420674494454291, guid: ee34a60d53aa502479fcae0ef63ce697, type: 3}
   speed: 2
