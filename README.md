@@ -4,7 +4,8 @@
  as it'll make the WHOLE IA system WAY easier to manage!  
  I guess, I don't I have to see how to use it  
 
- Game works but AI are not implemented yet...
+ Game works but AI are not implemented yet...  
+ Need to start over with a tilemap and A* algorythm
 
  Tron game made with Unity (2022.3.2f1 LTS) for school project  
 
