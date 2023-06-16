@@ -19,10 +19,13 @@ public class Tron : MonoBehaviour
     [SerializeField] private GameObject cpu6;
     [SerializeField] private GameObject cpu7;
 
+    GameObject[] cpuPrefabs;
+
     private bool end = false;
 
     private void Start()
     {
+        cpuPrefabs = new GameObject[] { cpu1, cpu2, cpu3, cpu4, cpu5, cpu6, cpu7 };
         SpawnEveryone();
     }
 
@@ -35,21 +38,16 @@ public class Tron : MonoBehaviour
 
     private void SpawnEveryone()
     {
-        if(PlayerPrefs.GetInt("GameMode") == 0)
+        Instantiate(player1);
+
+        for (int i = 0; i < PlayerPrefs.GetInt("NumberOfCpus"); i++)
         {
-            Instantiate(player1);
-            Instantiate(player2);
+            Instantiate(cpuPrefabs[i]);
         }
-        else
+
+        if (PlayerPrefs.GetInt("GameMode") == 0)
         {
-            Instantiate(player1);
-            Instantiate(cpu1);
-            Instantiate(cpu2);
-            Instantiate(cpu3);
-            Instantiate(cpu4);
-            Instantiate(cpu5);
-            Instantiate(cpu6);
-            Instantiate(cpu7);
+            Instantiate(player2);
         }
     }
 

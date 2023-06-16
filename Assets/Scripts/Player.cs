@@ -11,7 +11,7 @@ public abstract class Player : MonoBehaviour
 
     [Header("Game Constants")]
     protected float speed;
-    protected float spawnRate = 0.02f;
+    protected float spawnRate = 0.015f;
 
     protected bool canExplode = true;
 
@@ -24,7 +24,7 @@ public abstract class Player : MonoBehaviour
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        speed = (PlayerPrefs.GetInt("Speed") + 1) * 2;
+        speed = (PlayerPrefs.GetInt("Speed") + 1) * 4;
         InitializeDirection();
     }
 

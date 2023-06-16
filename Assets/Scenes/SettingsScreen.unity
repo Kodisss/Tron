@@ -1318,7 +1318,7 @@ GameObject:
   - component: {fileID: 670305958}
   - component: {fileID: 670305957}
   m_Layer: 5
-  m_Name: Difficulty
+  m_Name: Number of CPUs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1397,18 +1397,28 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Easy
+    - m_Text: 0 CPU
       m_Image: {fileID: 0}
-    - m_Text: Medium
+    - m_Text: 1 CPU
       m_Image: {fileID: 0}
-    - m_Text: Hard
+    - m_Text: 2 CPU
+      m_Image: {fileID: 0}
+    - m_Text: 3 CPU
+      m_Image: {fileID: 0}
+    - m_Text: 4 CPU
+      m_Image: {fileID: 0}
+    - m_Text: 5 CPU
+      m_Image: {fileID: 0}
+    - m_Text: 6 CPU
+      m_Image: {fileID: 0}
+    - m_Text: 7 CPU
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2009730331}
         m_TargetAssemblyTypeName: SettingsScreen, Assembly-CSharp
-        m_MethodName: SetDifficulty
+        m_MethodName: SetNumberOfCPU
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1679,7 +1689,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 2}
-  m_SizeDelta: {x: 0, y: 250}
+  m_SizeDelta: {x: 0, y: 410.01}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &868041035
 MonoBehaviour:
@@ -2047,7 +2057,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Easy
+  m_text: 0 CPU
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b78bcb045e420284b9f89d1878807f6c, type: 2}
   m_sharedMaterial: {fileID: 5694632838436421831, guid: b78bcb045e420284b9f89d1878807f6c, type: 2}
@@ -3650,7 +3660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2cca0a650648474a93295b7795295db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultyMenu: {fileID: 670305957}
+  numberOfCPUMenu: {fileID: 670305957}
   gameModeMenu: {fileID: 1562288426}
   speedMenu: {fileID: 423952342}
 --- !u!1 &2094813370

@@ -11,7 +11,7 @@ public class TrailManager : MonoBehaviour
     {
         myCollider = GetComponent<BoxCollider2D>();
         myCollider.enabled = false;
-        Invoke(nameof(ActivateCollider), 0.3f);
+        Invoke(nameof(ActivateCollider), 0.15f);
     }
 
     private void ActivateCollider()

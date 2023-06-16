@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4320612969411822979}
   - component: {fileID: -1897853736153931484}
   m_Layer: 0
-  m_Name: Orange
+  m_Name: White
   m_TagString: CPU
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7732258007993546907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -10, y: -5, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.4901961, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -172,6 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionSFX: {fileID: 1992253877110080380, guid: 2b58a21ae3935e944b63cb28e8a73a7c, type: 3}
-  explosionVFX: {fileID: 1245202137872002604, guid: 0ab9fd52a1fa9234f8b76e384e6b1041, type: 3}
-  trail: {fileID: 6705420674494454291, guid: fd80f4d1bcbf3b448b1ab5ecb773253c, type: 3}
+  explosionVFX: {fileID: 1245202137872002604, guid: 2d2c1d6a4263ba74fa967948d87eed53, type: 3}
+  trail: {fileID: 6705420674494454291, guid: ee34a60d53aa502479fcae0ef63ce697, type: 3}
   target: {fileID: 1789671600846628322, guid: f99ef930ee5146f47aa71623ea8df585, type: 3}

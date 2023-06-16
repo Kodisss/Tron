@@ -6,13 +6,13 @@ using TMPro;
 
 public class SettingsScreen : MonoBehaviour
 {
-    [SerializeField] TMP_Dropdown difficultyMenu;
+    [SerializeField] TMP_Dropdown numberOfCPUMenu;
     [SerializeField] TMP_Dropdown gameModeMenu;
     [SerializeField] TMP_Dropdown speedMenu;
 
     private void Start()
     {
-        difficultyMenu.value = PlayerPrefs.GetInt("Difficulty");
+        numberOfCPUMenu.value = PlayerPrefs.GetInt("NumberOfCpus");
         gameModeMenu.value = PlayerPrefs.GetInt("GameMode");
         speedMenu.value = PlayerPrefs.GetInt("Speed");
     }
@@ -29,10 +29,11 @@ public class SettingsScreen : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void SetDifficulty(int input)
+    public void SetNumberOfCPU(int input)
     {
         // Save the difficulty setting
-        PlayerPrefs.SetInt("Difficulty", input);
+        
+        PlayerPrefs.SetInt("NumberOfCpus", input);
         PlayerPrefs.Save();
     }
 
