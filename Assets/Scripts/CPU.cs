@@ -1,17 +1,43 @@
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CPU : Player
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private Transform Player1;
+    [SerializeField] private Transform Player2;
+    private Transform target;
 
     protected override void Start()
     {
         base.Start();
+        PickATarget();
     }
 
     protected override void Update()
     {
         base.Update();
+    }
+
+    private void PickATarget()
+    {
+        if (PlayerPrefs.GetInt("GameMode") == 0)
+        {
+            if(Random.Range(0, 2) == 0)
+            {
+                target = Player1;
+                Debug.Log("Chose Player 1");
+            }
+            else
+            {
+                target = Player2;
+                Debug.Log("Chose Player 2");
+            }
+        }
+        else
+        {
+            target = Player1;
+            Debug.Log("Chose Player 1");
+        }
     }
 
     protected override void InitializeDirection()

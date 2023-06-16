@@ -174,4 +174,5 @@ MonoBehaviour:
   explosionSFX: {fileID: 1992253877110080380, guid: 2b58a21ae3935e944b63cb28e8a73a7c, type: 3}
   explosionVFX: {fileID: 1245202137872002604, guid: e849436f817c0354d9424d91b1cacd08, type: 3}
   trail: {fileID: 6705420674494454291, guid: d9acb75a2896c8f42ac74fb4b6c7587e, type: 3}
-  target: {fileID: 1789671600846628322, guid: f99ef930ee5146f47aa71623ea8df585, type: 3}
+  Player1: {fileID: 1789671600846628322, guid: f99ef930ee5146f47aa71623ea8df585, type: 3}
+  Player2: {fileID: 3855435770186337422, guid: 1bab060bba61a684ea6df78801bcac91, type: 3}
