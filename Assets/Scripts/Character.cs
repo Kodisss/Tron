@@ -22,14 +22,12 @@ public class Character : Player
         if (randomNumberX != 0)
         {
             randomNumberY = 0;
-            movingHorizontally = true;
-            movingVertically = false;
+            MovingHorizontally();
         }
         else
         {
             randomNumberY = Random.Range(0, 2) * 2 - 1;
-            movingHorizontally = false;
-            movingVertically = true;
+            MovingVertically();
         }
 
         direction = new Vector2(randomNumberX, randomNumberY);
@@ -51,14 +49,12 @@ public class Character : Player
         if (input.x != 0 && !movingHorizontally)
         {
             direction = new Vector2(input.x, 0f);
-            movingHorizontally = true;
-            movingVertically = false;
+            MovingHorizontally();
         }
         else if (input.y != 0 && !movingVertically)
         {
             direction = new Vector2(0f, input.y);
-            movingVertically = true;
-            movingHorizontally = false;
+            MovingVertically();
         }
     }
 }

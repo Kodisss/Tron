@@ -34,6 +34,7 @@ public class Tron : MonoBehaviour
     {
         GetWinnerName();
         ManageGameEnd();
+        Debug.Log(PlayerPrefs.GetString("Winner"));
     }
 
     private void SpawnEveryone()
@@ -63,15 +64,20 @@ public class Tron : MonoBehaviour
     private void GetWinnerName()
     {
         GameObject[] listOfCPU = GameObject.FindGameObjectsWithTag("CPU");
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        GameObject playerObject1 = GameObject.FindGameObjectWithTag("Player1");
+        GameObject playerObject2 = GameObject.FindGameObjectWithTag("Player2");
 
         if (listOfCPU.Length == 1)
         {
             PlayerPrefs.SetString("Winner", listOfCPU[0].name.Replace("(Clone)", ""));
         }
-        else if (playerObject && listOfCPU.Length == 0)
+        else if (playerObject1 && listOfCPU.Length == 0)
         {
-            PlayerPrefs.SetString("Winner", playerObject.name.Replace("(Clone)", ""));
+            PlayerPrefs.SetString("Winner", playerObject1.name.Replace("(Clone)", ""));
+        }
+        else if (playerObject2 && listOfCPU.Length == 0 && PlayerPrefs.GetInt("GameMode") == 0)
+        {
+            PlayerPrefs.SetString("Winner", playerObject2.name.Replace("(Clone)", ""));
         }
     }
 
@@ -83,10 +89,22 @@ public class Tron : MonoBehaviour
     private bool CheckForAlivePlayers()
     {
         bool result = true;
-        if (GameObject.FindWithTag("Player") == null && GameObject.FindWithTag("CPU") == null)
+
+        if (PlayerPrefs.GetInt("GameMode") == 0)
         {
-            result = false;
+            if (GameObject.FindWithTag("Player1") == null && GameObject.FindWithTag("Player 2") == null && GameObject.FindWithTag("CPU") == null)
+            {
+                result = false;
+            }
         }
+        else
+        {
+            if (GameObject.FindWithTag("Player1") == null && GameObject.FindWithTag("CPU") == null)
+            {
+                result = false;
+            }
+        }
+
         return result;
     }
 }

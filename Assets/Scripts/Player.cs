@@ -52,6 +52,18 @@ public abstract class Player : MonoBehaviour
         }
     }
 
+    protected void MovingHorizontally()
+    {
+        movingHorizontally = true;
+        movingVertically = false;
+    }
+
+    protected void MovingVertically()
+    {
+        movingHorizontally = false;
+        movingVertically = true;
+    }
+
     protected void Move()
     {
         rb.velocity = direction * speed;
