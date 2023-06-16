@@ -11,16 +11,19 @@ public class CPU : Player
     private float cooldown = 0f;
     private bool canMove = true;
 
+    private float signX;
+    private float signY;
+
     protected override void Start()
     {
-        base.Start();
         PickATarget();
+        FocusTarget();
+        base.Start();
     }
 
     protected override void Update()
     {
         FocusTarget();
-        Debug.Log(target);
         base.Update();
         CoolDownGestion();
     }
@@ -81,13 +84,23 @@ public class CPU : Player
         }
 
         direction = new Vector2(randomNumberX, randomNumberY);
+
+        Vector2 distance = new Vector2(target.position.x - this.transform.position.x, target.position.y - this.transform.position.y);
+        Vector2 distanceNorm = new Vector2(Mathf.Sign(distance.x), Mathf.Sign(distance.y));
+
+        signX = Mathf.Sign(distanceNorm.x);
+        signY = Mathf.Sign(distanceNorm.y);
     }
 
     protected override void UpdateDirection()
     {
-        WallAvoiding();
-        if (canMove) PathFinding();
+        if (canMove) WallAvoiding();
     }
+
+    /*protected override void UpdateDirection()
+    {
+        if (canMove) PathFinding();
+    }*/
 
     private void CoolDownGestion()
     {
@@ -96,7 +109,6 @@ public class CPU : Player
         if (cooldown >= timeBetweenMoves)
         {
             canMove = true;
-            cooldown = 0f;
         }
         else
         {
@@ -107,14 +119,54 @@ public class CPU : Player
     private void WallAvoiding()
     {
         LayerMask layerMaskWall = LayerMask.GetMask("Wall");
-        Vector2 origine = new Vector2(transform.position.x, transform.position.y);
-        Vector2 viseDroit = new Vector2(direction.x * 0.75f, direction.y * 0.75f);
+        float offset = 0.5f;
 
-        Debug.DrawRay(origine, viseDroit, Color.green);
-        //Debug.DrawRay(transform.position, new Vector2((direction.x + direction.x) * 0.75f, (direction.y - direction.y) * 0.75f), Color.blue);
-        //Debug.DrawRay(transform.position, new Vector2(direction.x * 0.75f, direction.y * 0.75f), Color.red);
+        Vector2 origin = new Vector2(transform.position.x + offset * direction.x, transform.position.y + offset * direction.y);
+        Vector2 straight = new Vector2(direction.x * offset, direction.y * offset);
+        Vector2 leftSide = new Vector2(-direction.y * offset, direction.x * offset);
+        Vector2 rightSide = new Vector2(direction.y * offset, -direction.x * offset);
 
-        //RaycastHit2D hit = Physics2D.Raycast(origin, direction, maxDistance, layerMaskWall);
+        //Vector2 originLeft = new Vector2(transform.position.x + offset * leftSide.x, transform.position.y + offset * leftSide.y);
+        //Vector2 originRight = new Vector2(transform.position.x + offset * rightSide.x, transform.position.y + offset * rightSide.y);
+
+        // this is for debug and vizualisation purposes
+        /*Debug.DrawRay(origin, straight, Color.green);
+        Debug.DrawRay(origin, leftSide, Color.blue);
+        Debug.DrawRay(origin, rightSide, Color.red);*/
+
+        RaycastHit2D hitStraight = Physics2D.Raycast(origin, straight, offset, layerMaskWall);
+        RaycastHit2D hitLeft = Physics2D.Raycast(origin, leftSide, offset, layerMaskWall);
+        RaycastHit2D hitRight = Physics2D.Raycast(origin, rightSide, offset, layerMaskWall);
+
+        if (hitStraight.collider != null)
+        {
+            //Debug.Log("Wall straight !");
+            if(hitLeft.collider != null)
+            {
+                Debug.Log("I go right !");
+                direction = rightSide;
+            }
+            else if (hitRight.collider != null)
+            {
+                Debug.Log("I go left !");
+                direction = leftSide;
+            }
+
+            // tell where you're going
+            if (direction.x == 0)
+            {
+                MovingVertically();
+            }
+            else
+            {
+                MovingHorizontally();
+            }
+            cooldown = 0f;
+        }
+        else
+        {
+            PathFinding();
+        }
     }
 
     private void PathFinding()
@@ -124,6 +176,8 @@ public class CPU : Player
 
         //Debug.Log("x = " + distance.x + " y = " + distance.y);
         //Debug.Log("x = " + distanceNorm.x + " y = " + distanceNorm.y);
+
+        if (signX == distanceNorm.x && signY == distanceNorm.y) return;
         
         // if you need to go vertically but you're not currently doing it then go !
         if(Mathf.Abs(distance.x) < Mathf.Abs(distance.y) && !movingVertically)
@@ -153,5 +207,10 @@ public class CPU : Player
             direction = new Vector2(0f, distanceNorm.y);
             MovingVertically();
         }
+
+        signX = distanceNorm.x;
+        signY = distanceNorm.y;
+
+        cooldown = 0f;
     }
 }

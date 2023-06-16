@@ -34,7 +34,6 @@ public class Tron : MonoBehaviour
     {
         GetWinnerName();
         ManageGameEnd();
-        Debug.Log(PlayerPrefs.GetString("Winner"));
     }
 
     private void SpawnEveryone()
