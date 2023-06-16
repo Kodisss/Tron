@@ -91,7 +91,7 @@ public class Tron : MonoBehaviour
 
         if (PlayerPrefs.GetInt("GameMode") == 0)
         {
-            if (GameObject.FindWithTag("Player1") == null && GameObject.FindWithTag("Player 2") == null && GameObject.FindWithTag("CPU") == null)
+            if (GameObject.FindWithTag("Player1") == null && GameObject.FindWithTag("Player2") == null && GameObject.FindWithTag("CPU") == null)
             {
                 result = false;
             }

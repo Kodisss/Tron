@@ -85,22 +85,22 @@ public class CPU : Player
 
         direction = new Vector2(randomNumberX, randomNumberY);
 
-        Vector2 distance = new Vector2(target.position.x - this.transform.position.x, target.position.y - this.transform.position.y);
+        /*Vector2 distance = new Vector2(target.position.x - this.transform.position.x, target.position.y - this.transform.position.y);
         Vector2 distanceNorm = new Vector2(Mathf.Sign(distance.x), Mathf.Sign(distance.y));
 
         signX = Mathf.Sign(distanceNorm.x);
-        signY = Mathf.Sign(distanceNorm.y);
-    }
-
-    protected override void UpdateDirection()
-    {
-        if (canMove) WallAvoiding();
+        signY = Mathf.Sign(distanceNorm.y);*/
     }
 
     /*protected override void UpdateDirection()
     {
-        if (canMove) PathFinding();
+        if (canMove) WallAvoiding();
     }*/
+
+    protected override void UpdateDirection()
+    {
+        if (canMove) PathFinding();
+    }
 
     private void CoolDownGestion()
     {
@@ -177,7 +177,7 @@ public class CPU : Player
         //Debug.Log("x = " + distance.x + " y = " + distance.y);
         //Debug.Log("x = " + distanceNorm.x + " y = " + distanceNorm.y);
 
-        if (signX == distanceNorm.x && signY == distanceNorm.y) return;
+        //if (signX == distanceNorm.x && signY == distanceNorm.y) return;
         
         // if you need to go vertically but you're not currently doing it then go !
         if(Mathf.Abs(distance.x) < Mathf.Abs(distance.y) && !movingVertically)
@@ -208,8 +208,8 @@ public class CPU : Player
             MovingVertically();
         }
 
-        signX = distanceNorm.x;
-        signY = distanceNorm.y;
+        //signX = distanceNorm.x;
+        //signY = distanceNorm.y;
 
         cooldown = 0f;
     }
