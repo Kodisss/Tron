@@ -6,8 +6,6 @@ public class CPU : CharacterMovement
     private string targetName;
     private Transform target;
 
-    private float timeBetweenMoves = 0.1f;
-    private float cooldown = 0f;
     private bool canPathfind = true;
 
     private float previousX;
@@ -28,13 +26,12 @@ public class CPU : CharacterMovement
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (canPathfind) PathFinding();
+        if (canPathfind) WallAvoiding();
     }
 
     private void Update()
     {
         FocusTarget();
-        CoolDownGestion();
     }
 
     protected override void Move()
@@ -84,29 +81,9 @@ public class CPU : CharacterMovement
         }
     }
 
-    /*protected override void UpdateDirection()
-    {
-        if (canMove) WallAvoiding();
-    }*/
-
-    private void CoolDownGestion()
-    {
-        cooldown += Time.deltaTime;
-
-        if (cooldown >= timeBetweenMoves)
-        {
-            canPathfind = true;
-        }
-        else
-        {
-            canPathfind = false;
-        }
-    }
-
     private void WallAvoiding()
     {
-        LayerMask layerMaskWall = LayerMask.GetMask("Wall");
-        float offset = 0.5f;
+        float offset = 0.6f;
 
         Vector2 origin = new Vector2(transform.position.x + offset * movement.x, transform.position.y + offset * movement.y);
         Vector2 straight = new Vector2(movement.x * offset, movement.y * offset);
@@ -121,9 +98,9 @@ public class CPU : CharacterMovement
         Debug.DrawRay(origin, leftSide, Color.blue);
         Debug.DrawRay(origin, rightSide, Color.red);*/
 
-        RaycastHit2D hitStraight = Physics2D.Raycast(origin, straight, offset, layerMaskWall);
-        RaycastHit2D hitLeft = Physics2D.Raycast(origin, leftSide, offset, layerMaskWall);
-        RaycastHit2D hitRight = Physics2D.Raycast(origin, rightSide, offset, layerMaskWall);
+        RaycastHit2D hitStraight = Physics2D.Raycast(origin, straight, offset);
+        RaycastHit2D hitLeft = Physics2D.Raycast(origin, leftSide, offset);
+        RaycastHit2D hitRight = Physics2D.Raycast(origin, rightSide, offset);
 
         if (hitStraight.collider != null)
         {
@@ -148,7 +125,10 @@ public class CPU : CharacterMovement
             {
                 MakeHorizontal();
             }
-            cooldown = 0f;
+        }
+        else if (hitLeft.collider != null || hitRight.collider != null)
+        {
+            movement = straight;
         }
         else
         {
@@ -219,7 +199,5 @@ public class CPU : CharacterMovement
 
         previousX = distanceNorm.x;
         previousY = distanceNorm.y;
-
-        cooldown = 0f;
     }
 }
