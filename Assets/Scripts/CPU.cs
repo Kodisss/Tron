@@ -1,18 +1,23 @@
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-public class CPU : Player
+public class CPU : CharacterMovement
 {
     private string targetName;
     private Transform target;
 
     private float timeBetweenMoves = 0.3f;
     private float cooldown = 0f;
-    private bool canMove = true;
+    private bool canPathfind;
 
     private float signX;
     private float signY;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+    
     protected override void Start()
     {
         PickATarget();
@@ -20,29 +25,34 @@ public class CPU : Player
         base.Start();
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        if (canPathfind) PathFinding();
+    }
+
+    private void Update()
     {
         FocusTarget();
-        base.Update();
         CoolDownGestion();
     }
 
     private void FocusTarget()
     {
-        if(GameObject.FindWithTag(targetName) != null) // if player is alive, follow them
+        if (GameObject.FindWithTag(targetName) != null) // if player is alive, follow them
         {
             target = GameObject.FindWithTag(targetName).GetComponent<Transform>();
         }
         else // if not, make the list of all the CPUs and target one at random
         {
             GameObject[] listOfCPU = GameObject.FindGameObjectsWithTag("CPU");
-            if(listOfCPU.Length > 0)
+            if (listOfCPU.Length > 0)
             {
                 target = listOfCPU[Random.Range(0, listOfCPU.Length)].GetComponent<Transform>();
             }
             else // if no CPU alive, you win ! So just don't move and die
             {
-                canMove = false;
+                canPathfind = false;
             }
         }
     }
@@ -51,7 +61,7 @@ public class CPU : Player
     {
         if (PlayerPrefs.GetInt("GameMode") == 0)
         {
-            if(Random.Range(0, 2) == 0)
+            if (Random.Range(0, 2) == 0)
             {
                 targetName = "Player1";
             }
@@ -66,40 +76,10 @@ public class CPU : Player
         }
     }
 
-    protected override void InitializeDirection()
-    {
-        int randomNumberX = Random.Range(-1, 2);
-        int randomNumberY;
-
-        if (randomNumberX != 0)
-        {
-            randomNumberY = 0;
-            MovingHorizontally();
-        }
-        else
-        {
-            randomNumberY = Random.Range(0, 2) * 2 - 1;
-            MovingVertically();
-        }
-
-        direction = new Vector2(randomNumberX, randomNumberY);
-
-        /*Vector2 distance = new Vector2(target.position.x - this.transform.position.x, target.position.y - this.transform.position.y);
-        Vector2 distanceNorm = new Vector2(Mathf.Sign(distance.x), Mathf.Sign(distance.y));
-
-        signX = Mathf.Sign(distanceNorm.x);
-        signY = Mathf.Sign(distanceNorm.y);*/
-    }
-
     /*protected override void UpdateDirection()
     {
         if (canMove) WallAvoiding();
     }*/
-
-    protected override void UpdateDirection()
-    {
-        if (canMove) PathFinding();
-    }
 
     private void CoolDownGestion()
     {
@@ -107,11 +87,11 @@ public class CPU : Player
 
         if (cooldown >= timeBetweenMoves)
         {
-            canMove = true;
+            canPathfind = true;
         }
         else
         {
-            canMove = false;
+            canPathfind = false;
         }
     }
 
@@ -120,10 +100,10 @@ public class CPU : Player
         LayerMask layerMaskWall = LayerMask.GetMask("Wall");
         float offset = 0.5f;
 
-        Vector2 origin = new Vector2(transform.position.x + offset * direction.x, transform.position.y + offset * direction.y);
-        Vector2 straight = new Vector2(direction.x * offset, direction.y * offset);
-        Vector2 leftSide = new Vector2(-direction.y * offset, direction.x * offset);
-        Vector2 rightSide = new Vector2(direction.y * offset, -direction.x * offset);
+        Vector2 origin = new Vector2(transform.position.x + offset * movement.x, transform.position.y + offset * movement.y);
+        Vector2 straight = new Vector2(movement.x * offset, movement.y * offset);
+        Vector2 leftSide = new Vector2(-movement.y * offset, movement.x * offset);
+        Vector2 rightSide = new Vector2(movement.y * offset, -movement.x * offset);
 
         //Vector2 originLeft = new Vector2(transform.position.x + offset * leftSide.x, transform.position.y + offset * leftSide.y);
         //Vector2 originRight = new Vector2(transform.position.x + offset * rightSide.x, transform.position.y + offset * rightSide.y);
@@ -140,25 +120,25 @@ public class CPU : Player
         if (hitStraight.collider != null)
         {
             //Debug.Log("Wall straight !");
-            if(hitLeft.collider != null)
+            if (hitLeft.collider != null)
             {
                 Debug.Log("I go right !");
-                direction = rightSide;
+                movement = rightSide;
             }
             else if (hitRight.collider != null)
             {
                 Debug.Log("I go left !");
-                direction = leftSide;
+                movement = leftSide;
             }
 
             // tell where you're going
-            if (direction.x == 0)
+            if (movement.x == 0)
             {
-                MovingVertically();
+                MakeVertical();
             }
             else
             {
-                MovingHorizontally();
+                MakeHorizontal();
             }
             cooldown = 0f;
         }
@@ -177,34 +157,34 @@ public class CPU : Player
         //Debug.Log("x = " + distanceNorm.x + " y = " + distanceNorm.y);
 
         //if (signX == distanceNorm.x && signY == distanceNorm.y) return;
-        
+
         // if you need to go vertically but you're not currently doing it then go !
-        if(Mathf.Abs(distance.x) < Mathf.Abs(distance.y) && !movingVertically)
+        if (Mathf.Abs(distance.x) < Mathf.Abs(distance.y) && !goesVertical)
         {
             //Debug.Log("I go Vertically along " + distanceNorm.y);
-            direction = new Vector2(0f, distanceNorm.y);
-            MovingVertically();
+            movement = new Vector2(0f, distanceNorm.y);
+            MakeVertical();
         }
         // if you need to go vertically but you're are currently doing it move horizontally instead in the player direction
-        else if (Mathf.Abs(distance.x) < Mathf.Abs(distance.y) && movingVertically)
+        else if (Mathf.Abs(distance.x) < Mathf.Abs(distance.y) && goesVertical)
         {
             //Debug.Log("I go Horizontally along " + distanceNorm.x);
-            direction = new Vector2(distanceNorm.x, 0f);
-            MovingHorizontally();
+            movement = new Vector2(distanceNorm.x, 0f);
+            MakeHorizontal();
         }
         // if you need to go horizontally but you're not currently doing it then go !
-        else if (Mathf.Abs(distance.x) > Mathf.Abs(distance.y) && !movingHorizontally)
+        else if (Mathf.Abs(distance.x) > Mathf.Abs(distance.y) && !goesHorizontal)
         {
             //Debug.Log("I go Horizontally along " + distanceNorm.x);
-            direction = new Vector2(distanceNorm.x, 0f);
-            MovingHorizontally();
+            movement = new Vector2(distanceNorm.x, 0f);
+            MakeHorizontal();
         }
         // if you need to go horizontally but you're are currently doing it move vertically instead in the player direction
-        else if (Mathf.Abs(distance.x) > Mathf.Abs(distance.y) && movingHorizontally)
+        else if (Mathf.Abs(distance.x) > Mathf.Abs(distance.y) && goesHorizontal)
         {
             //Debug.Log("I go Vertically along " + distanceNorm.y);
-            direction = new Vector2(0f, distanceNorm.y);
-            MovingVertically();
+            movement = new Vector2(0f, distanceNorm.y);
+            MakeVertical();
         }
 
         //signX = distanceNorm.x;
