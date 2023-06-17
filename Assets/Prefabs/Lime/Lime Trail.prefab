@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7651280377486011898}
   - component: {fileID: 4904194005427774346}
   m_Layer: 0
-  m_Name: Basic Trail
+  m_Name: Lime Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f276285ed414e9146b3f80f359e12064, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ccab4dabba11d3847b8ff43adf66b2b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

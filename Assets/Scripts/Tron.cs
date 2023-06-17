@@ -18,6 +18,8 @@ public class Tron : MonoBehaviour
     [SerializeField] private GameObject cpu5;
     [SerializeField] private GameObject cpu6;
     [SerializeField] private GameObject cpu7;
+    [SerializeField] private GameObject cpu8;
+    [SerializeField] private GameObject cpu9;
 
     GameObject[] cpuPrefabs;
 
@@ -25,7 +27,7 @@ public class Tron : MonoBehaviour
 
     private void Start()
     {
-        cpuPrefabs = new GameObject[] { cpu1, cpu2, cpu3, cpu4, cpu5, cpu6, cpu7 };
+        cpuPrefabs = new GameObject[] { cpu1, cpu2, cpu3, cpu4, cpu5, cpu6, cpu7, cpu8, cpu9 };
         SpawnEveryone();
     }
 
@@ -33,7 +35,6 @@ public class Tron : MonoBehaviour
     private void Update()
     {
         GetWinnerName();
-        ManageGameEnd();
     }
 
     private void SpawnEveryone()
@@ -51,59 +52,38 @@ public class Tron : MonoBehaviour
         }
     }
 
-    private void ManageGameEnd()
-    {
-        if (!CheckForAlivePlayers() && !end)
-        {
-            end = true;
-            Invoke(nameof(EndScreen), 1f);
-        }
-    }
-
     private void GetWinnerName()
     {
         GameObject[] listOfCPU = GameObject.FindGameObjectsWithTag("CPU");
+        List<string> listOfNames = new List<string>();
         GameObject playerObject1 = GameObject.FindGameObjectWithTag("Player1");
         GameObject playerObject2 = GameObject.FindGameObjectWithTag("Player2");
 
-        if (listOfCPU.Length == 1)
+        for(int i = 0; i < listOfCPU.Length; i++)
         {
-            PlayerPrefs.SetString("Winner", listOfCPU[0].name.Replace("(Clone)", ""));
+            if(listOfCPU[i].transform.Find("Winner") != null)
+            {
+                listOfNames.Add(listOfCPU[i].name.Replace("(Clone)", ""));
+            }
         }
-        else if (playerObject1 && listOfCPU.Length == 0)
+
+        if (playerObject1.transform.Find("Winner") != null) listOfNames.Add(playerObject1.name.Replace("(Clone)", ""));
+        if (playerObject2)
         {
-            PlayerPrefs.SetString("Winner", playerObject1.name.Replace("(Clone)", ""));
+            if (playerObject2.transform.Find("Winner") != null) listOfNames.Add(playerObject2.name.Replace("(Clone)", ""));
         }
-        else if (playerObject2 && listOfCPU.Length == 0 && PlayerPrefs.GetInt("GameMode") == 0)
+        
+
+        if (listOfNames.Count == 1 && !end)
         {
-            PlayerPrefs.SetString("Winner", playerObject2.name.Replace("(Clone)", ""));
+            PlayerPrefs.SetString("Winner", listOfNames[0]);
+            end = true;
+            Invoke(nameof(EndScreen), 1f);
         }
     }
 
     private void EndScreen()
     {
         SceneManager.LoadScene("EndScreen");
-    }
-
-    private bool CheckForAlivePlayers()
-    {
-        bool result = true;
-
-        if (PlayerPrefs.GetInt("GameMode") == 0)
-        {
-            if (GameObject.FindWithTag("Player1") == null && GameObject.FindWithTag("Player2") == null && GameObject.FindWithTag("CPU") == null)
-            {
-                result = false;
-            }
-        }
-        else
-        {
-            if (GameObject.FindWithTag("Player1") == null && GameObject.FindWithTag("CPU") == null)
-            {
-                result = false;
-            }
-        }
-
-        return result;
     }
 }

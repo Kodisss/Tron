@@ -12,13 +12,12 @@ GameObject:
   - component: {fileID: 1014072162292641501}
   - component: {fileID: 2470183240817610135}
   - component: {fileID: 7753429067592737813}
-  - component: {fileID: 6269987923854026869}
-  - component: {fileID: 5231733727753118818}
+  - component: {fileID: -3575314230904815568}
   - component: {fileID: 2276120918938520452}
   - component: {fileID: 6195745348708512851}
   m_Layer: 0
-  m_Name: Orange
-  m_TagString: Player2
+  m_Name: Light Blue
+  m_TagString: CPU
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,11 +30,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397666362405187903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40, y: 0, z: 0}
+  m_LocalPosition: {x: 12.5, y: -15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3348891034255687327}
+  - {fileID: 2071650009494332632}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f876649e725638d499ef6c0293a5e1e0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7137c73ef09574e4f8edebb4cca2e3f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -163,7 +162,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6269987923854026869
+--- !u!114 &-3575314230904815568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,43 +171,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1397666362405187903}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 00ab9bc196e733c4e8fea764afec2f3d, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player2
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &5231733727753118818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397666362405187903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36394c084d28aea49a83401e7b438d32, type: 3}
+  m_Script: {fileID: 11500000, guid: 79c62044caa4e8148b1d06cb58a5ab40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explosionSFX: {fileID: 1992253877110080380, guid: 2b58a21ae3935e944b63cb28e8a73a7c, type: 3}
-  explosionVFX: {fileID: 1245202137872002604, guid: 867bf2a881cbd3f4a99cdb9ed8c1a70c, type: 3}
+  explosionVFX: {fileID: 1245202137872002604, guid: 9f3aa85049368f5448be2560b92a0c6c, type: 3}
   speed: 10
-  trailSegmentPrefab: {fileID: 2275672292301832531, guid: 845369b8d77cfb84fb7524e1a6dc4879, type: 3}
+  trailSegmentPrefab: {fileID: 2275672292301832531, guid: d19f8beb0b78a0c459876ef56e0c8d3a, type: 3}
   trailSegmentSpacing: 1.8
 --- !u!120 &2276120918938520452
 LineRenderer:
@@ -275,9 +244,9 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.41176474, b: 0.14509805, a: 1}
-      key1: {r: 0.99256057, g: 0.40755484, b: 0.15767014, a: 1}
-      key2: {r: 0.49411768, g: 0.1254902, b: 1, a: 0}
+      key0: {r: 0.12941177, g: 0.5882353, b: 1, a: 1}
+      key1: {r: 0.12941177, g: 0.5882353, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -285,7 +254,7 @@ LineRenderer:
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 65535
+      ctime2: 0
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -299,7 +268,7 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 1
+      m_Mode: 0
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
@@ -326,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f365d7cadfd8e42a97a4197b58b9a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7825915043153701297
+--- !u!1 &2671329419884598692
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -334,7 +303,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3348891034255687327}
+  - component: {fileID: 2071650009494332632}
   m_Layer: 0
   m_Name: Winner
   m_TagString: Winner
@@ -342,13 +311,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3348891034255687327
+--- !u!4 &2071650009494332632
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7825915043153701297}
+  m_GameObject: {fileID: 2671329419884598692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}

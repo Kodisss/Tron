@@ -159,5 +159,6 @@ public abstract class CharacterMovement : MonoBehaviour
         CameraShake.Instance.ShakeCamera(5f, 0.1f);
         Destroy(explosionSound, 0.5f);
         Destroy(explosionParticles, 1f);
+        Destroy(transform.GetChild(0).gameObject);
     }
 }

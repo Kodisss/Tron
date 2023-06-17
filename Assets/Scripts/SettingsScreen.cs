@@ -8,25 +8,16 @@ public class SettingsScreen : MonoBehaviour
 {
     [SerializeField] TMP_Dropdown numberOfCPUMenu;
     [SerializeField] TMP_Dropdown gameModeMenu;
-    [SerializeField] TMP_Dropdown speedMenu;
 
     private void Start()
     {
         numberOfCPUMenu.value = PlayerPrefs.GetInt("NumberOfCpus");
         gameModeMenu.value = PlayerPrefs.GetInt("GameMode");
-        speedMenu.value = PlayerPrefs.GetInt("Speed");
     }
 
     private void Update()
     {
         ManageInputs();
-    }
-
-    public void SetSpeed(int input)
-    {
-        // Save the difficulty setting
-        PlayerPrefs.SetInt("Speed", input);
-        PlayerPrefs.Save();
     }
 
     public void SetNumberOfCPU(int input)
