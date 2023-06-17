@@ -48,7 +48,7 @@ public abstract class CharacterMovement : MonoBehaviour
         }
     }
 
-    protected void Move()
+    protected virtual void Move()
     {
         if ((movement.x != 0 || movement.y != 0) && canMove)
         {
