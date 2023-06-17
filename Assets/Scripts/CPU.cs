@@ -6,12 +6,12 @@ public class CPU : CharacterMovement
     private string targetName;
     private Transform target;
 
-    private float timeBetweenMoves = 0.3f;
+    private float timeBetweenMoves = 0.1f;
     private float cooldown = 0f;
     private bool canPathfind = true;
 
-    private float signX;
-    private float signY;
+    private float previousX;
+    private float previousY;
 
     protected override void Awake()
     {
@@ -169,34 +169,56 @@ public class CPU : CharacterMovement
         // if you need to go vertically but you're not currently doing it then go !
         if (Mathf.Abs(distance.x) < Mathf.Abs(distance.y) && !goesVertical)
         {
-            Debug.Log("I go Vertically along " + distanceNorm.y);
+            //Debug.Log("I go Vertically along " + distanceNorm.y);
             movement = new Vector2(0f, distanceNorm.y);
             MakeVertical();
         }
-        // if you need to go vertically but you're are currently doing it move horizontally instead in the player direction
+        // if you need to go vertically and you're are currently doing it
         else if (Mathf.Abs(distance.x) < Mathf.Abs(distance.y) && goesVertical)
         {
-            Debug.Log("I go Horizontally along " + distanceNorm.x);
-            movement = new Vector2(distanceNorm.x, 0f);
-            MakeHorizontal();
+            // if it's your direction continue
+            if (previousY == distanceNorm.y)
+            {
+                //Debug.Log("I go Vertically along " + distanceNorm.y);
+                movement = new Vector2(0f, distanceNorm.y);
+                MakeVertical();
+            }
+            // else move horizontally once to not destroy yourself
+            else
+            {
+                //Debug.Log("I go Horizontally along " + distanceNorm.x);
+                movement = new Vector2(distanceNorm.x, 0f);
+                MakeHorizontal();
+            }
         }
         // if you need to go horizontally but you're not currently doing it then go !
         else if (Mathf.Abs(distance.x) > Mathf.Abs(distance.y) && !goesHorizontal)
         {
-            Debug.Log("I go Horizontally along " + distanceNorm.x);
+            //Debug.Log("I go Horizontally along " + distanceNorm.x);
             movement = new Vector2(distanceNorm.x, 0f);
             MakeHorizontal();
         }
-        // if you need to go horizontally but you're are currently doing it move vertically instead in the player direction
+        // if you need to go horizontally and you're are currently doing it
         else if (Mathf.Abs(distance.x) > Mathf.Abs(distance.y) && goesHorizontal)
         {
-            Debug.Log("I go Vertically along " + distanceNorm.y);
-            movement = new Vector2(0f, distanceNorm.y);
-            MakeVertical();
+            // if it's your direction continue
+            if (previousX == distanceNorm.x)
+            {
+                //Debug.Log("I go Vertically along " + distanceNorm.y);
+                movement = new Vector2(distanceNorm.x, 0f);
+                MakeHorizontal();
+            }
+            // else move vertically once to not destroy yourself
+            else
+            {
+                //Debug.Log("I go Vertically along " + distanceNorm.y);
+                movement = new Vector2(0f, distanceNorm.y);
+                MakeVertical();
+            }
         }
 
-        //signX = distanceNorm.x;
-        //signY = distanceNorm.y;
+        previousX = distanceNorm.x;
+        previousY = distanceNorm.y;
 
         cooldown = 0f;
     }

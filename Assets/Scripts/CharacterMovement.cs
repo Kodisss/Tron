@@ -13,7 +13,7 @@ public abstract class CharacterMovement : MonoBehaviour
 
     [Header("Trail Gestion")]
     [SerializeField] protected GameObject trailSegmentPrefab;
-    [SerializeField] protected float trailSegmentSpacing = 1.8f;
+    protected float trailSegmentSpacing = 1.5f;
 
     protected Vector3 previousPosition;
 
