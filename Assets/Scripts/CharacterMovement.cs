@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,17 +7,23 @@ public abstract class CharacterMovement : MonoBehaviour
     [Header("Attached GameObjects")]
     [SerializeField] protected GameObject explosionSFX;
     [SerializeField] protected GameObject explosionVFX;
-    [SerializeField] protected GameObject trail;
 
     [Header("Player Constants")]
-    [SerializeField] protected float speed = 5f;
+    [SerializeField] protected float speed = 10f;
+
+    [Header("Trail Gestion")]
+    [SerializeField] protected GameObject trailSegmentPrefab;
+    [SerializeField] protected float trailSegmentSpacing = 1.8f;
+
+    protected Vector3 previousPosition;
 
     // boolean used for movement gestion
     protected bool canExplode = true;
+    protected bool alive = true;
     protected bool canMove = true;
     protected bool goesHorizontal = false;
     protected bool goesVertical = false;
-
+    
     protected Vector2 movement;
     protected Rigidbody2D rb;
 
@@ -27,22 +34,28 @@ public abstract class CharacterMovement : MonoBehaviour
 
     protected virtual void Start()
     {
+        previousPosition = rb.transform.position;
         InitializeDirection();
     }
 
     protected virtual void FixedUpdate()
     {
-        AuthoriseMovement();
-        Move();
+        if (alive)
+        {
+            AuthoriseMovement();
+            DetectIfYoureSafeFromYourTrail();
+            Move();
+        }
     }
 
     protected void Move()
     {
-        if((movement.x != 0 || movement.y != 0) && canMove)
+        if ((movement.x != 0 || movement.y != 0) && canMove)
         {
             rb.velocity = movement * speed;
         }
     }
+
 
     protected void InitializeDirection()
     {
@@ -113,28 +126,38 @@ public abstract class CharacterMovement : MonoBehaviour
         goesVertical = true;
     }
 
+    protected void DetectIfYoureSafeFromYourTrail()
+    {
+        if (Vector2.Distance(transform.position, previousPosition) >= trailSegmentSpacing)
+        {
+            SpawnTrail();
+        }
+    }
+
     protected void SpawnTrail()
     {
+        Instantiate(trailSegmentPrefab, previousPosition, Quaternion.identity);
 
+        previousPosition = rb.transform.position;
     }
 
     protected void OnCollisionEnter2D(Collision2D collision)
     {
-        if (canExplode)
+        if (alive)
         {
-            //Instantiate(trail, rb.transform.position, rb.transform.rotation);
-            PlayExplosion();
-            canExplode = false;
+            Instantiate(trailSegmentPrefab, rb.transform.position, Quaternion.identity);
+            Die();
         }
     }
 
-    protected void PlayExplosion()
+    protected void Die()
     {
+        alive = false;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
         GameObject explosionSound = Instantiate(explosionSFX);
         GameObject explosionParticles = Instantiate(explosionVFX, rb.transform.position, rb.transform.rotation);
         CameraShake.Instance.ShakeCamera(5f, 0.1f);
         Destroy(explosionSound, 0.5f);
         Destroy(explosionParticles, 1f);
-        Destroy(gameObject);
     }
 }
